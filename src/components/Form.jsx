@@ -14,7 +14,6 @@ export default function Form({ isEdit }) {
   });
   const [apiError, setApiError] = useState(null);
 
-  // Only fetch data when in edit mode
   const { data, loading, error } = useFetch(
     `${import.meta.env.VITE_API_URL}/startups/${id}`
   );
@@ -53,7 +52,6 @@ export default function Form({ isEdit }) {
           setApiError(errorData.message || "Failed to update startup");
         }
       } else {
-        // Add new startup logic
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/startups`,
           {
