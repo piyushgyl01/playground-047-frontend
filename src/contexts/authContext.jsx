@@ -1,20 +1,16 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
-// Create the AuthContext
 const AuthContext = createContext();
 
-// Custom hook to use the auth context
 export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-// Provider component
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Check if user is already logged in (on initial load)
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
@@ -39,7 +35,6 @@ export const AuthProvider = ({ children }) => {
     checkAuthStatus();
   }, []);
 
-  // Register a new user
   const register = async (userData) => {
     setError(null);
     try {
@@ -69,7 +64,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Login user
   const login = async (credentials) => {
     setError(null);
     try {
@@ -99,7 +93,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Logout user
   const logout = async () => {
     try {
       const response = await fetch(
@@ -123,7 +116,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Refresh token
   const refreshToken = async () => {
     try {
       const response = await fetch(
@@ -146,10 +138,8 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Check if user is authenticated
   const isAuthenticated = !!user;
 
-  // Context value
   const value = {
     user,
     loading,
